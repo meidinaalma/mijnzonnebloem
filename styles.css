@@ -54,6 +54,19 @@ main {
   overflow: hidden;
 }
 
+body.is-page-three .cover,
+body.is-page-three .memory {
+  display: none;
+}
+
+body.is-page-three main {
+  display: block;
+}
+
+body.is-page-three .page-three {
+  min-height: 100vh;
+}
+
 .panel::after {
   content: "";
   position: absolute;

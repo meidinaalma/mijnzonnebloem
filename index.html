@@ -94,7 +94,20 @@
         window.removeEventListener("click", startAudio);
         window.removeEventListener("scroll", startAudio);
       };
-      window.addEventListener("DOMContentLoaded", startAudio, { once: true });
+
+      const updatePageView = () => {
+        const isPageThree = window.location.hash === "#page-3";
+        document.body.classList.toggle("is-page-three", isPageThree);
+        if (isPageThree) {
+          document.getElementById("page-3")?.scrollIntoView();
+        }
+      };
+
+      window.addEventListener("DOMContentLoaded", () => {
+        startAudio();
+        updatePageView();
+      });
+      window.addEventListener("hashchange", updatePageView);
       window.addEventListener("click", startAudio);
       window.addEventListener("scroll", startAudio, { once: true });
     </script>
