@@ -14,7 +14,15 @@
   </head>
   <body>
     <div class="audio-player" aria-label="Background music">
-      <audio id="bg-audio" class="audio-player-control" loop controls>
+      <audio
+        id="bg-audio"
+        class="audio-player-control"
+        loop
+        controls
+        autoplay
+        playsinline
+        preload="auto"
+      >
         <source src="assets/lagu 1.mp3" type="audio/mpeg" />
       </audio>
     </div>
@@ -77,6 +85,7 @@
         window.removeEventListener("click", startAudio);
         window.removeEventListener("scroll", startAudio);
       };
+      window.addEventListener("DOMContentLoaded", startAudio, { once: true });
       window.addEventListener("click", startAudio);
       window.addEventListener("scroll", startAudio, { once: true });
     </script>
