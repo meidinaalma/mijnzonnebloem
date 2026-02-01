@@ -93,20 +93,6 @@ main {
   overflow: hidden;
 }
 
-body.is-page-three .cover,
-body.is-page-three .memory {
-  display: none;
-}
-
-body.is-page-three main {
-  display: block;
-}
-
-body.is-page-three .page-three {
-  display: block;
-  min-height: 100vh;
-}
-
 .panel::after {
   content: "";
   position: absolute;
@@ -137,7 +123,6 @@ body.is-page-three .page-three {
   background: var(--paper);
   min-height: auto;
   padding: 0;
-  display: none;
 }
 
 .page-three-art {
