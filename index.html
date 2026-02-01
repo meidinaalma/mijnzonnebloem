@@ -20,6 +20,7 @@
         loop
         controls
         autoplay
+        muted
         playsinline
         preload="auto"
       >
@@ -37,7 +38,7 @@
       <section class="panel memory" id="page-2" aria-labelledby="memory-title">
         <div class="memory-art">
           <img src="assets/new 2.png" alt="Memory page design" class="memory-image" />
-          <a class="memory-hotspot" href="page-3.html" aria-label="My Biggest Heartbreak"></a>
+          <a class="memory-hotspot" href="#page-3" aria-label="My Biggest Heartbreak"></a>
         </div>
         <div class="memory-inner">
           <p class="memory-tag">Journey Through Grieving</p>
@@ -58,7 +59,7 @@
             <div class="memory-card">
               <img src="assets/6.jpeg" alt="Graveside memory" />
               <div>
-                <h3><a class="memory-card-link" href="page-3.html">My Biggest Heartbreak</a></h3>
+                <h3><a class="memory-card-link" href="#page-3">My Biggest Heartbreak</a></h3>
                 <p>Living with you since the day i was born, got me...</p>
               </div>
             </div>
@@ -76,11 +77,19 @@
           </div>
         </div>
       </section>
+      <section class="panel page-three" id="page-3" aria-labelledby="page-three-title">
+        <h1 id="page-three-title" class="visually-hidden">My Biggest Heartbreak</h1>
+        <a class="back-link" href="#page-2" aria-label="Back to page two">&larr;</a>
+        <div class="page-three-art">
+          <img src="assets/page 3.png" alt="My Biggest Heartbreak" class="page-three-image" />
+        </div>
+      </section>
     </main>
     <script>
       const audio = document.getElementById("bg-audio");
       const startAudio = () => {
         if (!audio) return;
+        if (audio.muted) audio.muted = false;
         audio.play().catch(() => {});
         window.removeEventListener("click", startAudio);
         window.removeEventListener("scroll", startAudio);
