@@ -13,6 +13,12 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div class="audio-overlay" id="audio-overlay" aria-label="Start audio" role="button">
+      <div class="audio-overlay-content">
+        <p class="audio-overlay-title">Tap to start</p>
+        <p class="audio-overlay-subtitle">Play the memory soundtrack</p>
+      </div>
+    </div>
     <div class="audio-player" aria-label="Background music">
       <audio
         id="bg-audio"
@@ -98,6 +104,7 @@
         audio.play().catch(() => {});
         window.removeEventListener("click", unmuteAudio);
         window.removeEventListener("scroll", unmuteAudio);
+        document.getElementById("audio-overlay")?.classList.add("is-hidden");
       };
 
       const updatePageView = () => {
@@ -115,6 +122,7 @@
       window.addEventListener("hashchange", updatePageView);
       window.addEventListener("click", unmuteAudio);
       window.addEventListener("scroll", unmuteAudio, { once: true });
+      document.getElementById("audio-overlay")?.addEventListener("click", unmuteAudio);
     </script>
   </body>
 </html>
