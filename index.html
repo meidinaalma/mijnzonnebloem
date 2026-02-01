@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>In Memory Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Cormorant+Garamond:wght@400;500;600&family=Dancing+Script:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="audio-player" aria-label="Background music">
+      <audio id="bg-audio" class="audio-player-control" loop controls>
+        <source src="assets/lagu 1.mp3" type="audio/mpeg" />
+      </audio>
+    </div>
+    <main>
+      <section class="panel cover" aria-labelledby="cover-title">
+        <h1 id="cover-title" class="visually-hidden">Our beloved grandma</h1>
+        <p class="visually-hidden">To: Our beloved grandma</p>
+        <div class="cover-art">
+          <img src="assets/cover.png" alt="Our beloved grandma" class="cover-image" />
+        </div>
+      </section>
+      <section class="panel memory" id="page-2" aria-labelledby="memory-title">
+        <div class="memory-art">
+          <img src="assets/new 2.png" alt="Memory page design" class="memory-image" />
+          <a class="memory-hotspot" href="page-3.html" aria-label="My Biggest Heartbreak"></a>
+        </div>
+        <div class="memory-inner">
+          <p class="memory-tag">Journey Through Grieving</p>
+          <h2 id="memory-title" class="memory-title">Eyang Putriku Sayang</h2>
+          <div class="memory-layout">
+            <div class="memory-text memory-text-left">
+              <p>
+
+
+                
+                Losing you is literally the most painful thing that ever happened to me.
+                There's no day goes by without me not thinking about you.
+              </p>
+            </div>
+            <figure class="memory-photo torn-frame">
+              <img src="assets/2.jpeg" alt="Grandma with family outside" />
+            </figure>
+            <div class="memory-card">
+              <img src="assets/6.jpeg" alt="Graveside memory" />
+              <div>
+                <h3><a class="memory-card-link" href="page-3.html">My Biggest Heartbreak</a></h3>
+                <p>Living with you since the day i was born, got me...</p>
+              </div>
+            </div>
+          </div>
+          <div class="memory-gallery" aria-label="Photo memories">
+            <figure class="memory-frame torn-frame">
+              <img src="assets/3.jpeg" alt="Grandma at home with family" />
+            </figure>
+            <figure class="memory-frame torn-frame">
+              <img src="assets/4.jpeg" alt="Grandma and child at celebration" />
+            </figure>
+            <figure class="memory-frame torn-frame">
+              <img src="assets/5.jpg" alt="Grandma and child sharing a hug" />
+            </figure>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script>
+      const audio = document.getElementById("bg-audio");
+      const startAudio = () => {
+        if (!audio) return;
+        audio.play().catch(() => {});
+        window.removeEventListener("click", startAudio);
+        window.removeEventListener("scroll", startAudio);
+      };
+      window.addEventListener("click", startAudio);
+      window.addEventListener("scroll", startAudio, { once: true });
+    </script>
+  </body>
+</html>
