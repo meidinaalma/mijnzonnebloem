@@ -64,6 +64,7 @@ body.is-page-three main {
 }
 
 body.is-page-three .page-three {
+  display: block;
   min-height: 100vh;
 }
 
@@ -97,6 +98,7 @@ body.is-page-three .page-three {
   background: var(--paper);
   min-height: auto;
   padding: 0;
+  display: none;
 }
 
 .page-three-art {
