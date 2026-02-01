@@ -49,6 +49,21 @@
         audio.play().catch(() => {});
       };
 
+      const restoreAudioTime = () => {
+        if (!audio) return;
+        const savedTime = Number.parseFloat(sessionStorage.getItem("audioTime") || "0");
+        if (!Number.isNaN(savedTime) && savedTime > 0) {
+          audio.currentTime = savedTime;
+        }
+      };
+
+      const saveAudioTime = () => {
+        if (!audio) return;
+        if (!Number.isNaN(audio.currentTime)) {
+          sessionStorage.setItem("audioTime", String(audio.currentTime));
+        }
+      };
+
       const unmuteAudio = () => {
         if (!audio) return;
         if (audio.muted) audio.muted = false;
@@ -60,10 +75,18 @@
       };
 
       window.addEventListener("DOMContentLoaded", () => {
+        if (audio) {
+          audio.addEventListener("loadedmetadata", restoreAudioTime, { once: true });
+          audio.addEventListener("timeupdate", saveAudioTime);
+        }
         startAudio();
         if (sessionStorage.getItem("audioUnlocked") === "1") {
           unmuteAudio();
         }
+      });
+      window.addEventListener("beforeunload", saveAudioTime);
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") saveAudioTime();
       });
       window.addEventListener("click", unmuteAudio);
       window.addEventListener("scroll", unmuteAudio, { once: true });
