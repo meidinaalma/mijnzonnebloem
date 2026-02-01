@@ -397,6 +397,22 @@ body.is-page-three .page-three {
     background-position: center top;
   }
 
+  .cover-art,
+  .memory-art,
+  .page-three-art {
+    width: 100%;
+    height: 100vh;
+  }
+
+  .cover-image,
+  .memory-image,
+  .page-three-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
 
   .memory-layout {
     grid-template-columns: 1fr;
