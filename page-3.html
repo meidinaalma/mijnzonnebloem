@@ -81,6 +81,7 @@
         }
         startAudio();
         if (sessionStorage.getItem("audioUnlocked") === "1") {
+          document.getElementById("audio-overlay")?.classList.add("is-hidden");
           unmuteAudio();
         }
       });
