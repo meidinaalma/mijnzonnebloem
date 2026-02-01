@@ -95,6 +95,7 @@
         if (!audio) return;
         if (audio.muted) audio.muted = false;
         audio.play().catch(() => {});
+        sessionStorage.setItem("audioUnlocked", "1");
         window.removeEventListener("click", unmuteAudio);
         window.removeEventListener("scroll", unmuteAudio);
         document.getElementById("audio-overlay")?.classList.add("is-hidden");
@@ -102,6 +103,9 @@
 
       window.addEventListener("DOMContentLoaded", () => {
         startAudio();
+        if (sessionStorage.getItem("audioUnlocked") === "1") {
+          unmuteAudio();
+        }
       });
       window.addEventListener("click", unmuteAudio);
       window.addEventListener("scroll", unmuteAudio, { once: true });
