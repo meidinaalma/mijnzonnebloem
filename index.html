@@ -89,10 +89,15 @@
       const audio = document.getElementById("bg-audio");
       const startAudio = () => {
         if (!audio) return;
+        audio.play().catch(() => {});
+      };
+
+      const unmuteAudio = () => {
+        if (!audio) return;
         if (audio.muted) audio.muted = false;
         audio.play().catch(() => {});
-        window.removeEventListener("click", startAudio);
-        window.removeEventListener("scroll", startAudio);
+        window.removeEventListener("click", unmuteAudio);
+        window.removeEventListener("scroll", unmuteAudio);
       };
 
       const updatePageView = () => {
@@ -108,8 +113,8 @@
         updatePageView();
       });
       window.addEventListener("hashchange", updatePageView);
-      window.addEventListener("click", startAudio);
-      window.addEventListener("scroll", startAudio, { once: true });
+      window.addEventListener("click", unmuteAudio);
+      window.addEventListener("scroll", unmuteAudio, { once: true });
     </script>
   </body>
 </html>
