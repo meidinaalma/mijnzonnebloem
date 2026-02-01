@@ -382,12 +382,16 @@ main {
     background-position: center top;
   }
 
+  .memory {
+    min-height: auto;
+  }
+
   .memory-art {
-    height: 100vh;
+    height: auto;
   }
 
   .memory-image {
-    height: 100%;
+    height: auto;
     object-fit: contain;
     object-position: center top;
   }
