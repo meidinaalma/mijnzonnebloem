@@ -36,7 +36,12 @@
     <main>
       <section class="panel page-three" aria-labelledby="page-three-title">
         <h1 id="page-three-title" class="visually-hidden">My Biggest Heartbreak</h1>
-        <a class="back-link" href="index.html#page-2" aria-label="Back to page two">&larr;</a>
+        <a
+          class="back-link"
+          href="index.html#page-2"
+          aria-label="Back to page two"
+          data-audio-save="true"
+        >&larr;</a>
         <div class="page-three-art">
           <img src="assets/page 3.png" alt="My Biggest Heartbreak" class="page-three-image" />
         </div>
@@ -44,6 +49,7 @@
     </main>
     <script>
       const audio = document.getElementById("bg-audio");
+      let isRestoringAudio = true;
       const startAudio = () => {
         if (!audio) return;
         audio.play().catch(() => {});
@@ -55,10 +61,12 @@
         if (!Number.isNaN(savedTime) && savedTime > 0) {
           audio.currentTime = savedTime;
         }
+        isRestoringAudio = false;
       };
 
       const saveAudioTime = () => {
         if (!audio) return;
+        if (isRestoringAudio) return;
         if (!Number.isNaN(audio.currentTime)) {
           sessionStorage.setItem("audioTime", String(audio.currentTime));
         }
@@ -74,12 +82,25 @@
         document.getElementById("audio-overlay")?.classList.add("is-hidden");
       };
 
+      const bindAudioSaveLinks = () => {
+        document.querySelectorAll("[data-audio-save]").forEach((link) => {
+          link.addEventListener("click", saveAudioTime);
+        });
+      };
+
       window.addEventListener("DOMContentLoaded", () => {
         if (audio) {
           audio.addEventListener("loadedmetadata", restoreAudioTime, { once: true });
           audio.addEventListener("timeupdate", saveAudioTime);
         }
         startAudio();
+        if (sessionStorage.getItem("audioUnlocked") === "1") {
+          document.getElementById("audio-overlay")?.classList.add("is-hidden");
+          unmuteAudio();
+        }
+        bindAudioSaveLinks();
+      });
+      window.addEventListener("pageshow", () => {
         if (sessionStorage.getItem("audioUnlocked") === "1") {
           document.getElementById("audio-overlay")?.classList.add("is-hidden");
           unmuteAudio();

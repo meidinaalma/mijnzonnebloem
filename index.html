@@ -34,58 +34,47 @@
       </audio>
     </div>
     <main>
-      <section class="panel cover" aria-labelledby="cover-title">
+      <section class="panel canva-embed" aria-labelledby="cover-title">
         <h1 id="cover-title" class="visually-hidden">Our beloved grandma</h1>
-        <p class="visually-hidden">To: Our beloved grandma</p>
-        <div class="cover-art">
-          <img src="assets/cover.png" alt="Our beloved grandma" class="cover-image" />
+        <div class="canva-embed-frame">
+          <iframe
+            title="Canva design"
+            loading="lazy"
+            src="https://www.canva.com/design/DAHAISSPr3w/5JedpQljwOhF-VFTBLcP_g/view?embed"
+            allowfullscreen="allowfullscreen"
+            allow="fullscreen"
+          ></iframe>
+          <a
+            class="desktop-hotspot-heartbreak"
+            href="page-3.html"
+            aria-label="My Biggest Heartbreak"
+            data-audio-save="true"
+          ></a>
         </div>
       </section>
-      <section class="panel memory" id="page-2" aria-labelledby="memory-title">
-        <div class="memory-art">
-          <img src="assets/new 2.png" alt="Memory page design" class="memory-image" />
-          <a class="memory-hotspot" href="page-3.html" aria-label="My Biggest Heartbreak"></a>
-        </div>
-        <div class="memory-inner">
-          <p class="memory-tag">Journey Through Grieving</p>
-          <h2 id="memory-title" class="memory-title">Eyang Putriku Sayang</h2>
-          <div class="memory-layout">
-            <div class="memory-text memory-text-left">
-              <p>
-
-
-                
-                Losing you is literally the most painful thing that ever happened to me.
-                There's no day goes by without me not thinking about you.
-              </p>
-            </div>
-            <figure class="memory-photo torn-frame">
-              <img src="assets/2.jpeg" alt="Grandma with family outside" />
-            </figure>
-            <div class="memory-card">
-              <img src="assets/6.jpeg" alt="Graveside memory" />
-              <div>
-                <h3><a class="memory-card-link" href="page-3.html">My Biggest Heartbreak</a></h3>
-                <p>Living with you since the day i was born, got me...</p>
-              </div>
-            </div>
-          </div>
-          <div class="memory-gallery" aria-label="Photo memories">
-            <figure class="memory-frame torn-frame">
-              <img src="assets/3.jpeg" alt="Grandma at home with family" />
-            </figure>
-            <figure class="memory-frame torn-frame">
-              <img src="assets/4.jpeg" alt="Grandma and child at celebration" />
-            </figure>
-            <figure class="memory-frame torn-frame">
-              <img src="assets/5.jpg" alt="Grandma and child sharing a hug" />
-            </figure>
-          </div>
+      <section class="mobile-portrait" aria-labelledby="mobile-title">
+        <h1 id="mobile-title" class="visually-hidden">Our beloved grandma</h1>
+        <div class="mobile-embed-frame">
+          <iframe
+            title="Canva mobile design"
+            loading="lazy"
+            src="https://www.canva.com/design/DAHAI4yhJ28/RmSjKlZbouXgaQ6EmwNLTg/view?embed"
+            allowfullscreen="allowfullscreen"
+            allow="fullscreen"
+            scrolling="yes"
+          ></iframe>
+          <a
+            class="mobile-hotspot-heartbreak"
+            href="page-3.html"
+            aria-label="My Biggest Heartbreak"
+            data-audio-save="true"
+          ></a>
         </div>
       </section>
     </main>
     <script>
       const audio = document.getElementById("bg-audio");
+      let isRestoringAudio = true;
       const startAudio = () => {
         if (!audio) return;
         audio.play().catch(() => {});
@@ -97,10 +86,12 @@
         if (!Number.isNaN(savedTime) && savedTime > 0) {
           audio.currentTime = savedTime;
         }
+        isRestoringAudio = false;
       };
 
       const saveAudioTime = () => {
         if (!audio) return;
+        if (isRestoringAudio) return;
         if (!Number.isNaN(audio.currentTime)) {
           sessionStorage.setItem("audioTime", String(audio.currentTime));
         }
@@ -116,12 +107,25 @@
         document.getElementById("audio-overlay")?.classList.add("is-hidden");
       };
 
+      const bindAudioSaveLinks = () => {
+        document.querySelectorAll("[data-audio-save]").forEach((link) => {
+          link.addEventListener("click", saveAudioTime);
+        });
+      };
+
       window.addEventListener("DOMContentLoaded", () => {
         if (audio) {
           audio.addEventListener("loadedmetadata", restoreAudioTime, { once: true });
           audio.addEventListener("timeupdate", saveAudioTime);
         }
         startAudio();
+        if (sessionStorage.getItem("audioUnlocked") === "1") {
+          document.getElementById("audio-overlay")?.classList.add("is-hidden");
+          unmuteAudio();
+        }
+        bindAudioSaveLinks();
+      });
+      window.addEventListener("pageshow", () => {
         if (sessionStorage.getItem("audioUnlocked") === "1") {
           document.getElementById("audio-overlay")?.classList.add("is-hidden");
           unmuteAudio();

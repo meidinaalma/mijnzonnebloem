@@ -355,6 +355,141 @@ main {
   transform: rotate(-1deg);
 }
 
+.canva-embed {
+  background: var(--night);
+  min-height: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.canva-embed-frame {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 112.4451%;
+  overflow: hidden;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.canva-embed-frame iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  border: none;
+}
+
+.desktop-hotspot-heartbreak {
+  position: absolute;
+  top: 64%;
+  left: 73%;
+  width: 20%;
+  height: 4.5%;
+  z-index: 2;
+  display: block;
+}
+
+.desktop-hotspot-heartbreak:hover {
+  outline: 1px dashed rgba(0, 0, 0, 0.2);
+}
+
+.canva-embed-link {
+  font-family: "Baloo 2", "Trebuchet MS", sans-serif;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+}
+
+.canva-embed-link:hover {
+  text-decoration: underline;
+}
+
+.mobile-portrait {
+  display: none;
+  position: relative;
+  min-height: 100vh;
+  padding: 0;
+  color: #f6f2ec;
+  background: var(--night);
+}
+
+.mobile-embed-frame {
+  position: relative;
+  width: 100%;
+  height: 0;
+  margin: 0;
+  padding-top: 355.5556%;
+  overflow: hidden;
+  border-radius: 0;
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-embed-frame iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  border: none;
+}
+
+.mobile-hotspot-heartbreak {
+  position: absolute;
+  top: 76.5%;
+  left: 62%;
+  width: 30%;
+  height: 6.5%;
+  z-index: 2;
+  display: block;
+}
+
+.mobile-hotspot-heartbreak:hover {
+  outline: 1px dashed rgba(255, 255, 255, 0.35);
+}
+
+.mobile-embed-link {
+  display: block;
+  text-align: center;
+  margin-top: 12px;
+  font-family: "Baloo 2", "Trebuchet MS", sans-serif;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+}
+
+.mobile-embed-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .canva-embed {
+    padding: 16px 12px 28px;
+  }
+
+  .canva-embed-frame {
+    padding-top: 170%;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 900px) {
+  .canva-embed {
+    display: none;
+  }
+
+  .mobile-portrait {
+    display: block;
+  }
+
+  .desktop-hotspot-heartbreak {
+    display: none;
+  }
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
