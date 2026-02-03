@@ -437,6 +437,18 @@ main {
   border: none;
 }
 
+.mobile-embed-ui-mask {
+  position: absolute;
+  top: clamp(10px, 2vw, 18px);
+  right: clamp(10px, 2vw, 18px);
+  width: clamp(92px, 18vw, 128px);
+  height: clamp(36px, 7vw, 52px);
+  background: linear-gradient(135deg, rgba(10, 10, 42, 0.95), rgba(10, 10, 42, 0.7));
+  border-radius: 12px;
+  z-index: 3;
+  pointer-events: auto;
+}
+
 .mobile-hotspot-heartbreak {
   position: absolute;
   top: 76.5%;
