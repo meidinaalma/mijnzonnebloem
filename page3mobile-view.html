@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>My Biggest Heartbreak</title>
+    <link rel="stylesheet" href="styles.css" />
     <style>
       body {
         margin: 0;
@@ -20,6 +21,87 @@
     </style>
   </head>
   <body>
+    <div class="audio-overlay" id="audio-overlay" aria-label="Start audio" role="button">
+      <div class="audio-overlay-content">
+        <p class="audio-overlay-title">Tap to start</p>
+        <p class="audio-overlay-subtitle">Play the memory soundtrack</p>
+      </div>
+    </div>
+    <div class="audio-player" aria-label="Background music">
+      <audio
+        id="bg-audio"
+        class="audio-player-control"
+        loop
+        controls
+        autoplay
+        muted
+        playsinline
+        preload="auto"
+      >
+        <source src="assets/lagu 1.mp3" type="audio/mpeg" />
+      </audio>
+    </div>
+    <a class="back-link" href="index.html" aria-label="Back to landing" data-audio-save="true">&larr;</a>
     <img src="assets/page3mobile.png" alt="My Biggest Heartbreak" />
+    <script>
+      const audio = document.getElementById("bg-audio");
+      let isRestoringAudio = true;
+      const startAudio = () => {
+        if (!audio) return;
+        audio.play().catch(() => {});
+      };
+
+      const restoreAudioTime = () => {
+        if (!audio) return;
+        const savedTime = Number.parseFloat(sessionStorage.getItem("audioTime") || "0");
+        if (!Number.isNaN(savedTime) && savedTime > 0) {
+          audio.currentTime = savedTime;
+        }
+        isRestoringAudio = false;
+      };
+
+      const saveAudioTime = () => {
+        if (!audio) return;
+        if (isRestoringAudio) return;
+        if (!Number.isNaN(audio.currentTime)) {
+          sessionStorage.setItem("audioTime", String(audio.currentTime));
+        }
+      };
+
+      const unmuteAudio = () => {
+        if (!audio) return;
+        if (audio.muted) audio.muted = false;
+        audio.play().catch(() => {});
+        sessionStorage.setItem("audioUnlocked", "1");
+        window.removeEventListener("click", unmuteAudio);
+        window.removeEventListener("scroll", unmuteAudio);
+        document.getElementById("audio-overlay")?.classList.add("is-hidden");
+      };
+
+      window.addEventListener("DOMContentLoaded", () => {
+        if (audio) {
+          audio.addEventListener("loadedmetadata", restoreAudioTime, { once: true });
+          audio.addEventListener("timeupdate", saveAudioTime);
+        }
+        startAudio();
+        if (sessionStorage.getItem("audioUnlocked") === "1") {
+          document.getElementById("audio-overlay")?.classList.add("is-hidden");
+          unmuteAudio();
+        }
+      });
+      window.addEventListener("pageshow", () => {
+        if (sessionStorage.getItem("audioUnlocked") === "1") {
+          document.getElementById("audio-overlay")?.classList.add("is-hidden");
+          unmuteAudio();
+        }
+      });
+      window.addEventListener("beforeunload", saveAudioTime);
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") saveAudioTime();
+      });
+      window.addEventListener("click", unmuteAudio);
+      window.addEventListener("scroll", unmuteAudio, { once: true });
+      document.getElementById("audio-overlay")?.addEventListener("click", unmuteAudio);
+    </script>
   </body>
 </html>

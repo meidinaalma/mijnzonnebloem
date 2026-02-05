@@ -519,6 +519,14 @@ main {
     padding-top: 170%;
     border-radius: 10px;
   }
+
+  .back-link {
+    width: 24px;
+    height: 24px;
+    font-size: 0.85rem;
+    top: 8px;
+    left: 8px;
+  }
 }
 
 @media (max-width: 900px) {

@@ -34,7 +34,7 @@
       </audio>
     </div>
     <main>
-      <section class="panel page-three" aria-labelledby="page-three-title">
+      <section class="panel page-three-embed" aria-labelledby="page-three-title">
         <h1 id="page-three-title" class="visually-hidden">My Biggest Heartbreak</h1>
         <a
           class="back-link"
@@ -42,8 +42,32 @@
           aria-label="Back to page two"
           data-audio-save="true"
         >&larr;</a>
-        <div class="page-three-art">
-          <img src="assets/page 3.png" alt="My Biggest Heartbreak" class="page-three-image" />
+        <div class="page-three-embed-frame">
+          <iframe
+            title="My Biggest Heartbreak"
+            loading="lazy"
+            src="https://www.canva.com/design/DAHAQor5rOk/DHid7j4fsAKK4u3FoaGyDg/view?embed"
+            allowfullscreen="allowfullscreen"
+            allow="fullscreen"
+          ></iframe>
+        </div>
+      </section>
+      <section class="page-three-mobile" aria-labelledby="page-three-mobile-title">
+        <h1 id="page-three-mobile-title" class="visually-hidden">My Biggest Heartbreak</h1>
+        <a
+          class="back-link"
+          href="index.html#page-2"
+          aria-label="Back to page two"
+          data-audio-save="true"
+        >&larr;</a>
+        <div class="page-three-mobile-frame">
+          <iframe
+            title="My Biggest Heartbreak mobile"
+            loading="lazy"
+            src="https://www.canva.com/design/DAHAISSPr3w/5JedpQljwOhF-VFTBLcP_g/view?embed"
+            allowfullscreen="allowfullscreen"
+            allow="fullscreen"
+          ></iframe>
         </div>
       </section>
     </main>
@@ -87,6 +111,7 @@
           link.addEventListener("click", saveAudioTime);
         });
       };
+
 
       window.addEventListener("DOMContentLoaded", () => {
         if (audio) {
